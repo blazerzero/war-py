@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from rich.console import Console
-import numpy as np
 import typing
+import random
 
 @dataclass
 class Card:
@@ -25,14 +25,55 @@ def generate_deck():
             deck.append(Card(card, i+1))
 
     # Return the deck
-    return np.array(deck)
+    return deck
 
 def war():
     '''Play an interactive game of War'''
     deck = generate_deck()
 
     # Shuffle the deck
-    np.random.shuffle(deck)
+    random.shuffle(deck)
+    
+    # Initialize each player's deck
+    my_cards = deck[:int(len(deck)/2)]
+    opp_cards = deck[int(len(deck)/2):]
+
+    # Initialize each player's stack of cards being used in war
+    my_war_stack: list[Card] = list()
+    opp_war_stack: list[Card] = list()
+
+    while len(my_cards) > 0 and len(opp_cards) > 0:
+        go = input('Press any key to make your next move.')
+        my_card: Card = my_cards.pop()
+        opp_card: Card = opp_cards.pop()
+        
+        console.print('Your card is:', my_card.name)
+        console.print("Your opponent's card is:", opp_card.name)
+
+        if my_card.value > opp_card.value:
+            my_cards = [my_card, opp_card] + my_war_stack + opp_war_stack + my_cards
+            my_war_stack = list()
+            opp_war_stack = list()
+
+        elif my_card.value < opp_card.value:
+            opp_cards = [my_card, opp_card] + my_war_stack + opp_war_stack + opp_cards
+            my_war_stack = list()
+            opp_war_stack = list()
+
+        elif my_card.value == opp_card.value:
+            console.print('War!')
+            my_war_stack.append(my_card)
+            opp_war_stack.append(opp_card)
+            my_war_stack.extend(my_cards[-3:])
+            opp_war_stack.extend(opp_cards[-3:])
+            my_cards = my_cards[:-3]
+            opp_cards = opp_cards[:-3]
+
+    if len(opp_cards) == 0:
+        console.print('You win!')
+    elif len(my_cards) == 0:
+        console.print('Your opponent wins!')
+    
 
 if __name__ == '__main__':
     war()
