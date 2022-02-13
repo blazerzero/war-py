@@ -92,8 +92,8 @@ def play():
         opp_card: Card = opp_cards.pop()
         
         # Show what each player's card is
-        console.print(f'Your card is: [bold #000000]{my_card.name}[/bold #000000]')
-        console.print(f"Your opponent's card is: [bold #000000]{opp_card.name}[/bold #000000]")
+        console.print(f'Your card is: [bold]{my_card.name}[/bold]')
+        console.print(f"Your opponent's card is: [bold]{opp_card.name}[/bold]")
 
         if my_card.value > opp_card.value:
             # The player wins the battle
@@ -103,8 +103,8 @@ def play():
             opp_war_stack = list()
             war = False
 
-            console.print('You have', len(my_cards), 'cards')
-            console.print('Your opponent has', len(opp_cards), 'cards\n\n')
+            console.print(f'You have {len(my_cards)} cards')
+            console.print(f'Your opponent has {len(opp_cards)} cards\n\n')
 
         elif my_card.value < opp_card.value:
             # The opponent wins the battle
@@ -114,8 +114,8 @@ def play():
             opp_war_stack = list()
             war = False
 
-            console.print('You have', len(my_cards), 'cards.')
-            console.print('Your opponent has', len(opp_cards), 'cards.\n\n')
+            console.print(f'You have {len(my_cards)} cards')
+            console.print(f'Your opponent has {len(opp_cards)} cards\n\n')
 
         elif my_card.value == opp_card.value:
             # Cards tied; begin war
