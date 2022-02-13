@@ -9,14 +9,11 @@ Interactive implementation of the [War card game](https://en.wikipedia.org/wiki/
 1. Install pip packages
     - `pipenv install`
 
-2. Enter the pip environment
-    - `pipenv shell`
+2. To play the game:
+    - `pipenv run python war.py`
 
-3. To play the game:
-    - `python war.py`
-
-4. To run the tests:
-    - `python war.py test`
+3. To run the tests:
+    - `pipenv run python war.py test`
 
 ---
 
