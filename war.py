@@ -97,7 +97,7 @@ def play():
 
         if my_card.value > opp_card.value:
             # The player wins the battle
-            console.print(f'You win this {"war" if war else "round"}!', style="green")
+            console.print(f'You win this {"war" if war else "battle"}!', style="green")
             my_cards = [my_card, opp_card] + my_war_stack + opp_war_stack + my_cards
             my_war_stack = list()
             opp_war_stack = list()
@@ -108,7 +108,7 @@ def play():
 
         elif my_card.value < opp_card.value:
             # The opponent wins the battle
-            console.print(f'Your opponent wins this {"war" if war else "round"}!', style="red")
+            console.print(f'Your opponent wins this {"war" if war else "battle"}!', style="red")
             opp_cards = [my_card, opp_card] + my_war_stack + opp_war_stack + opp_cards
             my_war_stack = list()
             opp_war_stack = list()
@@ -137,11 +137,14 @@ def play():
 
 if __name__ == '__main__':
     if len(sys.argv) == 1:
+        # Play the game
         play()
     elif sys.argv[1] == 'test':
+        # Run the tests
         main(argv=['first-arg-is-ignored'], exit=False)
     else:
-        console.print('\n[SYNTAX ERROR: INVALID COMMAND LINE ARGUMENTS]', style="bold red")
+        # Invalid command-line arguments
+        console.print('\n[ERROR: INVALID COMMAND LINE ARGUMENTS]', style="bold red")
         console.print('Valid command-line formats:\n', style="red")
         console.print('[bold blue]To play:[/bold blue] python war.py')
         console.print('[bold blue]To test:[/bold blue] python war.py test\n')
